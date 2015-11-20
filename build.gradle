@@ -43,10 +43,11 @@ jarAttributes {
 	'build-number' env('TRAVIS_BUILD_NUMBER')
 }
 
+def m2repoPath = (System.getenv('M2_REPO_DIRECTORY') ?: '') + "/.m2"
 uploadArchives {
 	repositories {
 		mavenDeployer {
-			repository(url: new File(buildDir, 'delphyne.github.io/.m2').toURL())
+			repository(url: new File(buildDir, m2repoPath).toURL())
 			pom.project {
 				licenses {
 					license {
