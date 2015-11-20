@@ -107,4 +107,20 @@ class DefaultJarsPluginIntegrationTest {
 		assert new JarFile(jar).entries().find { it.toString() == 'Foo.groovy' }
 		assert new JarFile(jar).entries().find { it.toString() == 'Bar.java' }
 	}
+
+	void testDoesNotCreateEmptyJar() {
+		new File(projectDir, 'build.gradle').text = """
+			plugins {
+				id 'com.github.delphyne.default-jars'
+			}
+			apply plugin: GroovyPlugin
+		"""
+
+		def result = runner
+				.withArguments('assemble')
+				.build()
+
+		assert result.tasks.find { BuildTask t -> t.path == ':javadoc' }
+		assert result.tasks.find { BuildTask t -> t.path == ':groovydoc' }
+	}
 }

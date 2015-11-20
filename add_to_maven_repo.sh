@@ -44,13 +44,13 @@ fi
 
 # copy any docs
 if [ -d build/docs/javadoc ]; then
-    JAVADOC_DEST_DIR = "${DOC_REPO_DIRECTORY}/${TRAVIS_REPO_SLUG}/${TRAVIS_TAG}"
+    JAVADOC_DEST_DIR="${DOC_REPO_DIRECTORY}/.docs/${TRAVIS_REPO_SLUG}/${TRAVIS_TAG}"
     test ! -d "${JAVADOC_DEST_DIR}" && mkdir -p "${JAVADOC_DEST_DIR}"
     cp -Rv build/docs/javadoc "${JAVADOC_DEST_DIR/javadoc}"
 fi
 
 if [ -d build/docs/groovydoc ]; then
-    GROOVYDOC_DEST_DIR = "${DOC_REPO_DIRECTORY}/${TRAVIS_REPO_SLUG}/${TRAVIS_TAG}"
+    GROOVYDOC_DEST_DIR="${DOC_REPO_DIRECTORY}/.docs/${TRAVIS_REPO_SLUG}/${TRAVIS_TAG}"
     test ! -d "${GROOVYDOC_DEST_DIR}" && mkdir -p "${GROOVYDOC_DEST_DIR}"
     cp -Rv build/docs/groovydoc "${GROOVYDOC_DEST_DIR/javadoc}"
 fi
@@ -64,7 +64,7 @@ popd
 
 pushd "${DOC_REPO_DIRECTORY}"
 #regenerate the java/groovy docs index
-./reindex.sh -d .docs -l 2
+./reindex.sh -d .docs -l 3
 git add .docs
 popd
 

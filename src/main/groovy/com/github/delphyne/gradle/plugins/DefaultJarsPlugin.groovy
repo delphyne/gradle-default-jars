@@ -38,6 +38,7 @@ class DefaultJarsPlugin implements Plugin<Project> {
 					description = 'Assembles a jar archive containing the Javadocs.'
 					dependsOn javadoc
 					from javadoc.destinationDir
+					onlyIf { javadoc.didWork }
 				}
 				project.artifacts.archives javadocs
 			}
@@ -50,6 +51,7 @@ class DefaultJarsPlugin implements Plugin<Project> {
 					description = 'Assembles a jar archive containing the Groovydocs.'
 					dependsOn groovydoc
 					from(groovydoc.destinationDir)
+					onlyIf { groovydoc.didWork }
 				}
 				project.artifacts.archives groovydocs
 			}
