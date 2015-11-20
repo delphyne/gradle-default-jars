@@ -71,12 +71,12 @@ popd
 # commit and push our changes back to the .m2 site
 pushd "${M2_REPO_DIRECTORY}"
 git commit -m "Publishing ${TRAVIS_REPO_SLUG}@${TRAVIS_TAG}"
-git push --quiet "https://${GH_TOKEN}@github.com/${M2_REPO}.io.git" master:master >/dev/null 2>&1
+git push --quiet "https://${GH_TOKEN}@github.com/${M2_REPO}.git" master:master >/dev/null 2>&1
 
 # if a different repo, push changes back to the .docs site
 if [ "$M2_REPO" != "$DOC_REPO" ]; then
     popd
     pushd "${DOC_REPO_DIRECTORY}"
     git commit -m "Publishing ${TRAVIS_REPO_SLUG}@${TRAVIS_TAG}"
-    git push --quiet "https://${GH_TOKEN}@github.com/${DOC_REPO}.io.git" master:master >/dev/null 2>&1
+    git push --quiet "https://${GH_TOKEN}@github.com/${DOC_REPO}.git" master:master >/dev/null 2>&1
 fi
