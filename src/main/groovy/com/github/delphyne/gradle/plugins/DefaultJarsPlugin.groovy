@@ -6,6 +6,16 @@ import org.gradle.api.tasks.bundling.Jar
 import org.gradle.api.tasks.javadoc.Groovydoc
 import org.gradle.api.tasks.javadoc.Javadoc
 
+/**
+ * A plugin which generates several jars by default, and adds them as project artifacts.
+ *
+ * If a plugin has been applied that creates the sourceSets project property, a sourceJar task is added
+ * and a jar containing project.sourceSets.main.allSource is added.
+ *
+ * If the javadoc task exists, a javadocJar task is added and its output is added.
+ *
+ * If the groovydoc task exists, a groovydocJar task is added and its output is added.
+ */
 class DefaultJarsPlugin implements Plugin<Project> {
 	@Override
 	void apply(Project project) {
