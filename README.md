@@ -3,6 +3,8 @@
 # gradle-default-jars
 _Automatically add and publish source and doc jar_
 
+[Groovydocs](http://delphyne.github.io/.docs/delphyne/gradle-default-jars/)
+
 This plugin automatically adds a source jar containing the contents of project.sourceSets.main.allSource, a
 javadoc jar, and a groovydoc jar (if appropriate) to your projects artifacts.
 
