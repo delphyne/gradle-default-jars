@@ -114,13 +114,22 @@ class DefaultJarsPluginIntegrationTest {
 				id 'com.github.delphyne.default-jars'
 			}
 			apply plugin: GroovyPlugin
+			apply plugin: MavenPlugin
+
+			uploadArchives {
+				repositories {
+					mavenDeployer {
+						repository(url: new File(buildDir, '.m2').toURL())
+					}
+				}
+			}
 		"""
 
-		def result = runner
-				.withArguments('assemble')
+		runner
+				.withArguments('uploadArchives')
 				.build()
 
-		assert result.tasks.find { BuildTask t -> t.path == ':javadoc' }
-		assert result.tasks.find { BuildTask t -> t.path == ':groovydoc' }
+		assert ! new File(projectDir, 'build/libs/').listFiles().find { it.name.contains('groovydoc' )}
+		assert ! new File(projectDir, 'build/libs/').listFiles().find { it.name.contains('javadoc' )}
 	}
 }

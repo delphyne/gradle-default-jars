@@ -31,27 +31,25 @@ class DefaultJarsPlugin implements Plugin<Project> {
 			}
 
 			Javadoc javadoc = (Javadoc) project.tasks.findByName('javadoc')
-			if (javadoc) {
+			if (! javadoc?.inputs?.sourceFiles?.isEmpty()) {
 				Jar javadocs = project.tasks.create('javadocJar', Jar)
 				javadocs.with{
 					classifier = 'javadoc'
 					description = 'Assembles a jar archive containing the Javadocs.'
 					dependsOn javadoc
 					from javadoc.destinationDir
-					onlyIf { javadoc.didWork }
 				}
 				project.artifacts.archives javadocs
 			}
 
 			Groovydoc groovydoc = (Groovydoc) project.tasks.findByName('groovydoc')
-			if (groovydoc) {
+			if (! groovydoc?.inputs?.sourceFiles?.isEmpty()) {
 				Jar groovydocs = project.tasks.create('groovydocJar', Jar)
 				groovydocs.with {
 					classifier = 'groovydoc'
 					description = 'Assembles a jar archive containing the Groovydocs.'
 					dependsOn groovydoc
 					from(groovydoc.destinationDir)
-					onlyIf { groovydoc.didWork }
 				}
 				project.artifacts.archives groovydocs
 			}
